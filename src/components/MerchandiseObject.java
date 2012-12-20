@@ -1,7 +1,9 @@
 package components;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import database.DatabaseConnection;
@@ -39,11 +41,70 @@ public class MerchandiseObject implements IStorable{
 		}
 	}
 	
-	
 	private MerchandiseObject() {
 		//Nothing to do
 	}
-
+	
+	//TODO Add check for merch exists
+	
+	public static MerchandiseObject createMerchandiseObject(int inv_num, double price_val) {
+		if(inv_num <= 0 || price_val <= 0)
+		throw new NullPointerException("One or more null objects in merchandise parameters.");
+		
+		checkConnection();
+		
+		MerchandiseObject merchandise = new MerchandiseObject();
+		merchandise.setInvID(inv_num);
+		merchandise.setPrice(price_val);
+		
+		USER_DATABASE_.writeComponent(merchandise);
+		
+		return merchandise;		
+	}
+	
+	public static List<MerchandiseObject> getAllMerchandise()
+	{
+		checkConnection();
+		
+		List<Map<String, String> > allMerch = USER_DATABASE_.getAllRecords(TABLE);
+		List<MerchandiseObject> inventory = new ArrayList<MerchandiseObject>();
+		for(Map<String, String> data : allMerch) {
+			MerchandiseObject merchandise = new MerchandiseObject();
+			merchandise.loadComponent(data);
+			inventory.add(merchandise);
+		}
+		return inventory;
+	}
+	
+	public static MerchandiseObject getMerchandiseByID(int id) 
+	{
+		checkConnection();
+		
+		MerchandiseObject merchandise = new MerchandiseObject();
+		USER_DATABASE_.readComponent(merchandise, Integer.toString(id));
+		return merchandise;
+		//TODO ADD fail check
+	}
+	
+	private void setPrice(double price_val) {
+		if(price_val <= 0)
+			throw new NullPointerException("One or more null objects in merchandise parameters.");
+		price = price_val;
+	}
+	
+	private void setInvID(int inv_id_val) {
+		if(inv_id_val <= 0)
+			throw new NullPointerException("One or more null objects in merchandise parameters.");
+		inv_id = inv_id_val;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+	
+	public int getID() {
+		return inv_id;
+	}
 
 	@Override
 	public void loadComponent(Map<String, String> data) {
