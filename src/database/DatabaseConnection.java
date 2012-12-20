@@ -299,10 +299,10 @@ public class DatabaseConnection
 		if( component == null )
 			return;
 		
-		//Map<String, String> values = component.storeComponent();
-		//String pkey = values.get(component.getPrimaryKey());
+		Map<String, String> values = component.storeComponent();
+		String pkey = values.get(component.getPrimaryKey());
 
-		deleteComponent(component.getTableName(), component.getColumnNames()[0], component.getPrimaryKey());
+		deleteComponent(component.getTableName(), component.getPrimaryKey(), pkey);
 	}
 	
 	/**
