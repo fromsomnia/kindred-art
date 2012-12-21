@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-List<MerchandiseObject> inventory = MerchandiseObject.getAllMerchandise();
+//List<MerchandiseObject> inventory = MerchandiseObject.getAllMerchandise();
 %>
 <title>Kindred-Art.com</title>
 </head>
@@ -16,13 +16,14 @@ List<MerchandiseObject> inventory = MerchandiseObject.getAllMerchandise();
 
 Current Inventory:<br>
 <br>
-<%
+<%/*
 int invSize = inventory.size();
 for(int i = 0; i < invSize; i++)
 {
 	out.print("Inv Num: " + inventory.get(i).getID() + "<br>");
 	out.print("Price  : " + inventory.get(i).getPrice() + "<br><br>");
-}
+}*/
+out.print("fix stuff here");
 %>
 
 </body>
