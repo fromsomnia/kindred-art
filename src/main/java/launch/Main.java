@@ -1,4 +1,3 @@
-:::java
 package launch;
 
 import java.io.File;
