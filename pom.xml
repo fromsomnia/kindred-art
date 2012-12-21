@@ -49,7 +49,7 @@
                 <assembleDirectory>target</assembleDirectory>
                 <programs>
                     <program>
-                        <mainClass>aunch/Main</mainClass>
+                        <mainClass>launch/Main.class</mainClass>
                         <name>webapp</name>
                     </program>
                 </programs>
